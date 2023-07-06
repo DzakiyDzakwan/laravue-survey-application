@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
-import MasterLayout from "../components/MasterLayout.vue";
+import MasterLayout from "../components/layout/MasterLayout.vue";
+import AuthLayout from "../components/layout/AuthLayout.vue";
 import Dashboard from "../components/pages/Dashboard.vue";
 import Survey from "../components/pages/Survey.vue";
 import Login from "../components/pages/Login.vue";
@@ -26,14 +27,23 @@ const routes = [
         ],
     },
     {
-        path: "/login",
-        name: "Login",
-        component: Login,
-    },
-    {
-        path: "/register",
-        name: "Register",
-        component: Register,
+        path: "/auth ",
+        redirect: "/login",
+        name: "Auth",
+        component: AuthLayout,
+        meta: { isGuest: true },
+        children: [
+            {
+                path: "/login",
+                name: "Login",
+                component: Login,
+            },
+            {
+                path: "/register",
+                name: "Register",
+                component: Register,
+            },
+        ],
     },
 ];
 
@@ -48,10 +58,7 @@ router.beforeEach((to, from, next) => {
         //redirect ke login page
         next({ name: "Login" });
         // Jika user sudah teruatentikasi mengakses route login dan register
-    } else if (
-        store.state.user.token &&
-        (to.name === "Login" || to.name === "Register")
-    ) {
+    } else if (to.meta.isGuest && store.state.user.token) {
         next({ name: "Dashboard" });
     } else {
         next();
