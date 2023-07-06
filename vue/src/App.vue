@@ -8,23 +8,7 @@ import { mapState } from "vuex";
 
 export default {
     setup() {
-        /* const routes = ref([
-            {
-                path: "/",
-                name: "Dashboard",
-            },
-            {
-                path: "/register",
-                name: "Register",
-            },
-            {
-                path: "/login",
-                name: "Login",
-            },
-        ]); */
-        return {
-            // routes,
-        };
+        return {};
     },
     computed: {
         ...mapState(["user", "post"]),
