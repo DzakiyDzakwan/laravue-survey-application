@@ -14,11 +14,17 @@
 </template>
 
 <script>
+// import { mapState } from "vuex";
+// import store from "../../store";
+
 export default {
     name: "Dashboard",
     components: {},
     setup() {
         return {};
     },
+    /* computed: {
+        ...mapState(["user"]),
+    }, */
 };
 </script>
