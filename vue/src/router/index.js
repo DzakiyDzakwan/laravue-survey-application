@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
-import MasterLayout from "../components/layout/MasterLayout.vue";
-import AuthLayout from "../components/layout/AuthLayout.vue";
-import Dashboard from "../components/pages/Dashboard.vue";
-import Survey from "../components/pages/Survey.vue";
-import Login from "../components/pages/Login.vue";
-import Register from "../components/pages/Register.vue";
+import MasterLayout from "../layout/MasterLayout.vue";
+import AuthLayout from "../layout/AuthLayout.vue";
+import Dashboard from "../pages/Dashboard.vue";
+import Survey from "../pages/Survey.vue";
+import Login from "../pages/Login.vue";
+import Register from "../pages/Register.vue";
 import store from "../store";
 
 const routes = [
