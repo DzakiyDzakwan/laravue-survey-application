@@ -13,7 +13,7 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form class="space-y-6" action="#" method="POST">
+        <form class="space-y-6" @submit.prevent="login">
             <div>
                 <label
                     for="email"
@@ -27,6 +27,7 @@
                         type="email"
                         autocomplete="email"
                         required=""
+                        v-model="credential.email"
                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                 </div>
@@ -39,13 +40,10 @@
                         class="block text-sm font-medium leading-6 text-gray-900"
                         >Password</label
                     >
-                    <div class="text-sm">
-                        <a
-                            href="#"
-                            class="font-semibold text-indigo-600 hover:text-indigo-500"
-                            >Forgot password?</a
-                        >
-                    </div>
+                    <EyeIcon
+                        class="block h-6 w-6 cursor-pointer"
+                        aria-hidden="true"
+                    />
                 </div>
                 <div class="mt-2">
                     <input
@@ -54,11 +52,11 @@
                         type="password"
                         autocomplete="current-password"
                         required=""
+                        v-model="credential.password"
                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                 </div>
             </div>
-
             <div>
                 <button
                     type="submit"
@@ -81,10 +79,31 @@
 </template>
 
 <script>
+import { ref } from "vue";
+import store from "../store";
+import { useRouter } from "vue-router";
+import { EyeIcon } from "@heroicons/vue/24/outline";
+
 export default {
     name: "Login",
+    components: { EyeIcon },
     setup() {
-        return {};
+        const credential = ref({
+            email: "",
+            password: "",
+        });
+
+        const router = useRouter();
+
+        function login() {
+            store.dispatch("login", credential.value).then(() => {
+                router.push({ name: "Dashboard" });
+            });
+        }
+        return {
+            credential,
+            login,
+        };
     },
 };
 </script>
