@@ -55,8 +55,8 @@ class AuthController extends Controller
             ]);
         } else {
             return response()->json([
-                'error' => "Credentials is Incorrect"
-            ]);
+                'error' => "Your provided credentials are not correct"
+            ], 422);
         }
 
 

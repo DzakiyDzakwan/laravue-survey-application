@@ -13,6 +13,12 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div
+            v-if="errorMessage"
+            class="rounded-sm bg-red-500 px-10 py-2 my-4 text-center text-white font-medium text-sm"
+        >
+            {{ errorMessage }}
+        </div>
         <form class="space-y-6" @submit.prevent="login">
             <div>
                 <label
@@ -93,15 +99,34 @@ export default {
             password: "",
         });
 
+        const errorMessage = ref("");
+
         const router = useRouter();
 
-        function login() {
-            store.dispatch("login", credential.value).then(() => {
+        async function login() {
+            /* store
+                .dispatch("login", credential.value)
+                .then(() => {
+                    console.log("berhasil");
+                    router.push({ name: "Dashboard" });
+                })
+                .catch((e) => {
+                    console.log(e);
+                    errorMessage.value = e.response.data.error;
+                }); */
+
+            try {
+                await store.dispatch("login", credential.value);
+                console.log("berhasil");
                 router.push({ name: "Dashboard" });
-            });
+            } catch (e) {
+                console.log(e);
+                errorMessage.value = e.response.data.error;
+            }
         }
         return {
             credential,
+            errorMessage,
             login,
         };
     },
