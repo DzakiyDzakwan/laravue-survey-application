@@ -58,8 +58,16 @@ class AuthController extends Controller
                 'error' => "Your provided credentials are not correct"
             ], 422);
         }
+    }
 
+    public function logout(Request $request) {
+        $user = Auth::user();
+        //Revoke the token that was used to authenticate the current request....
+        $user->currentAccessToken()->delete();
 
+        return response()->json([
+            'message' => "You've been successfully log out"
+        ], 200);
     }
 
 }

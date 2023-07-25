@@ -15,9 +15,14 @@
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <div
             v-if="errorMessage"
-            class="rounded-sm bg-red-500 px-10 py-2 my-4 text-center text-white font-medium text-sm"
+            class="flex items-center justify-between rounded-sm bg-red-500 px-2 py-2 my-4 text-center text-white font-medium text-sm"
         >
             {{ errorMessage }}
+            <XMarkIcon
+                @click="errorMessage = ''"
+                class="block h-8 w-8 p-1 cursor-pointer rounded-full transition-colors hover:bg-[rgba(0,0,0,0.2)]"
+                aria-hidden="true"
+            />
         </div>
         <form class="space-y-6" @submit.prevent="login">
             <div>
@@ -88,11 +93,11 @@
 import { ref } from "vue";
 import store from "../store";
 import { useRouter } from "vue-router";
-import { EyeIcon } from "@heroicons/vue/24/outline";
+import { EyeIcon, XMarkIcon } from "@heroicons/vue/24/outline";
 
 export default {
     name: "Login",
-    components: { EyeIcon },
+    components: { EyeIcon, XMarkIcon },
     setup() {
         const credential = ref({
             email: "",

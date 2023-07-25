@@ -106,14 +106,28 @@ const store = createStore({
         register({ commit }, data) {
             return axiosClient.post("/register", data).then((response) => {
                 commit("setUser", response.data);
-                return data;
+                return response.data;
             });
         },
         login({ commit }, data) {
             return axiosClient.post("/login", data).then((response) => {
                 commit("setUser", response.data);
-                return data;
+                return response.data;
             });
+        },
+        logout({ commit, state }) {
+            return axiosClient
+                .post("/logout", {
+                    headers: {
+                        Authorization: `Bearer ${sessionStorage.getItem(
+                            "TOKEN"
+                        )}`,
+                    },
+                })
+                .then((response) => {
+                    commit("logout");
+                    return response;
+                });
         },
     },
     //mutations adalah method yang digunakan untuk melakukan Perubahan terhadap state
