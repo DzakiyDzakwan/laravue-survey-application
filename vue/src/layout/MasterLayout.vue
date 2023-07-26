@@ -192,18 +192,19 @@ export default {
         function logout() {
             //panggil mutasi logout di store
             //without Backend
-            store.commit("logout");
+            /* store.commit("logout");
             //redirect user ke route login
             router.push({
                 name: "Login",
-            });
+            }); */
             //With Backend Still Error
-            /* store.dispatch("logout").then(() => {
+            store.dispatch("logout").then(() => {
                 //redirect user ke route login
+                console.log("Berhasil Logout");
                 router.push({
                     name: "Login",
                 });
-            }); */
+            });
         }
         return {
             user: computed(() => store.state.user.data),

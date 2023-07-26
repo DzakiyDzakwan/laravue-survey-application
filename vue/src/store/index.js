@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
 import axiosClient from "../axios";
+import axios from "axios";
 
 const store = createStore({
     //state merupakan data yang disimpan dan akan digunakan
@@ -104,12 +105,16 @@ const store = createStore({
         }, */
         //Axioss Without Try and Catch
         register({ commit }, data) {
+            /* await axios.get("http://localhost:8000/sanctum/csrf-cookie"); */
+
             return axiosClient.post("/register", data).then((response) => {
                 commit("setUser", response.data);
                 return response.data;
             });
         },
         login({ commit }, data) {
+            // axios.get("http://localhost:8000/sanctum/csrf-cookie");
+
             return axiosClient.post("/login", data).then((response) => {
                 commit("setUser", response.data);
                 return response.data;
