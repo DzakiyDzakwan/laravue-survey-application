@@ -1,6 +1,170 @@
 import { createStore } from "vuex";
 import axiosClient from "../axios";
-import axios from "axios";
+
+const exampleSurveys = [
+    {
+        id: 1,
+        title: "Survey Number 1",
+        slug: "survey-number-1",
+        status: "draft",
+        image: "",
+        description:
+            "Heloo its the first survey called <b>Survey Number 1</b>. This is the first example of surveys.",
+        created_at: "2023-07-26 15:30:00",
+        updated_at: "2023-07-26 15:30:00",
+        expired_at: "2023-08-02 15:30:00",
+        questions: [
+            {
+                id: 1,
+                type: "select",
+                question: "What's this called ?",
+                data: {
+                    options: [
+                        {
+                            uuid: "99369fd9-568a-4d42-933d-876ceb39401b",
+                            text: "Car",
+                        },
+                        {
+                            uuid: "99369fd9-568a-4d42-933d-876ceb39401c",
+                            text: "Plane",
+                        },
+                    ],
+                },
+            },
+            {
+                id: 2,
+                type: "checkbox",
+                question: "What's is the A.K.A stands for ?",
+                data: {
+                    options: [
+                        {
+                            uuid: "99369fd9-568a-4d42-933d-876ceb39401d",
+                            text: "Also known As",
+                        },
+                        {
+                            uuid: "99369fd9-568a-4d42-933d-876ceb39402a",
+                            text: "A kill Apes",
+                        },
+                    ],
+                },
+            },
+            {
+                id: 3,
+                type: "text",
+                question: "Who am I ?",
+                data: {},
+            },
+        ],
+    },
+    {
+        id: 2,
+        title: "Survey Number 2",
+        slug: "survey-number-2",
+        status: "draft",
+        image: "",
+        description:
+            "Heloo its the first survey called <b>Survey Number 2</b>. This is the first example of surveys.",
+        created_at: "2023-07-26 15:30:00",
+        updated_at: "2023-07-26 15:30:00",
+        expired_at: "2023-08-02 15:30:00",
+        questions: [
+            {
+                id: 1,
+                type: "select",
+                question: "What's this called ?",
+                data: {
+                    options: [
+                        {
+                            uuid: "99369fd9-568a-4d42-933d-876ceb39401b",
+                            text: "Car",
+                        },
+                        {
+                            uuid: "99369fd9-568a-4d42-933d-876ceb39401c",
+                            text: "Plane",
+                        },
+                    ],
+                },
+            },
+            {
+                id: 2,
+                type: "checkbox",
+                question: "What's is the A.K.A stands for ?",
+                data: {
+                    options: [
+                        {
+                            uuid: "99369fd9-568a-4d42-933d-876ceb39401d",
+                            text: "Also known As",
+                        },
+                        {
+                            uuid: "99369fd9-568a-4d42-933d-876ceb39402a",
+                            text: "A kill Apes",
+                        },
+                    ],
+                },
+            },
+            {
+                id: 3,
+                type: "text",
+                question: "Who am I ?",
+                data: {},
+            },
+        ],
+    },
+    {
+        id: 3,
+        title: "Survey Number 3",
+        slug: "survey-number-3",
+        status: "draft",
+        image: "",
+        description:
+            "Heloo its the first survey called <b>Survey Number 3</b>. This is the first example of surveys.",
+        created_at: "2023-07-26 15:30:00",
+        updated_at: "2023-07-26 15:30:00",
+        expired_at: "2023-08-02 15:30:00",
+        questions: [
+            {
+                id: 1,
+                type: "select",
+                question: "What's this called ?",
+                data: {
+                    options: [
+                        {
+                            uuid: "99369fd9-568a-4d42-933d-876ceb39401b",
+                            text: "Car",
+                        },
+                        {
+                            uuid: "99369fd9-568a-4d42-933d-876ceb39401c",
+                            text: "Plane",
+                        },
+                    ],
+                },
+            },
+            {
+                id: 2,
+                type: "checkbox",
+                question: "What's is the A.K.A stands for ?",
+                data: {
+                    options: [
+                        {
+                            uuid: "99369fd9-568a-4d42-933d-876ceb39401d",
+                            text: "Also known As",
+                        },
+                        {
+                            uuid: "99369fd9-568a-4d42-933d-876ceb39402a",
+                            text: "A kill Apes",
+                        },
+                    ],
+                },
+            },
+            {
+                id: 3,
+                type: "text",
+                question: "Who am I ?",
+                data: {},
+            },
+        ],
+    },
+];
 
 const store = createStore({
     //state merupakan data yang disimpan dan akan digunakan
@@ -10,9 +174,7 @@ const store = createStore({
             //Mengambil token dari session
             token: sessionStorage.getItem("TOKEN"),
         },
-        post: {
-            title: "Ini adalah post state",
-        },
+        surveys: [...exampleSurveys],
     },
     getters: {},
     actions: {
