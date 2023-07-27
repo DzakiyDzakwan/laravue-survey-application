@@ -126,7 +126,7 @@
 <script>
 import { ref } from "vue";
 import { EyeIcon } from "@heroicons/vue/24/outline";
-import store from "../store";
+// import store from "../store";
 import { useRouter } from "vue-router";
 export default {
     name: "Register",
@@ -134,6 +134,7 @@ export default {
         EyeIcon,
     },
     setup() {
+        const store = useStore();
         const router = useRouter();
 
         const user = ref({

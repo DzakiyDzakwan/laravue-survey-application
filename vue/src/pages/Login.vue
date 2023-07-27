@@ -91,14 +91,17 @@
 
 <script>
 import { ref } from "vue";
-import store from "../store";
+/* import store from "../store"; */
+
 import { useRouter } from "vue-router";
 import { EyeIcon, XMarkIcon } from "@heroicons/vue/24/outline";
+import { useStore } from "vuex";
 
 export default {
     name: "Login",
     components: { EyeIcon, XMarkIcon },
     setup() {
+        const store = useStore();
         const credential = ref({
             email: "",
             password: "",
