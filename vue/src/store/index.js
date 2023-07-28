@@ -121,48 +121,7 @@ const exampleSurveys = [
         created_at: "2023-07-26 15:30:00",
         updated_at: "2023-07-26 15:30:00",
         expired_at: "2023-08-02 15:30:00",
-        questions: [
-            {
-                id: 1,
-                type: "select",
-                question: "What's this called ?",
-                data: {
-                    options: [
-                        {
-                            uuid: "99369fd9-568a-4d42-933d-876ceb39401b",
-                            text: "Car",
-                        },
-                        {
-                            uuid: "99369fd9-568a-4d42-933d-876ceb39401c",
-                            text: "Plane",
-                        },
-                    ],
-                },
-            },
-            {
-                id: 2,
-                type: "checkbox",
-                question: "What's is the A.K.A stands for ?",
-                data: {
-                    options: [
-                        {
-                            uuid: "99369fd9-568a-4d42-933d-876ceb39401d",
-                            text: "Also known As",
-                        },
-                        {
-                            uuid: "99369fd9-568a-4d42-933d-876ceb39402a",
-                            text: "A kill Apes",
-                        },
-                    ],
-                },
-            },
-            {
-                id: 3,
-                type: "text",
-                question: "Who am I ?",
-                data: {},
-            },
-        ],
+        questions: [],
     },
 ];
 
@@ -295,6 +254,9 @@ const store = createStore({
                     commit("logout");
                     return response;
                 });
+        },
+        deleteSurvey({}, id) {
+            console.log(id);
         },
     },
     //mutations adalah method yang digunakan untuk melakukan Perubahan terhadap state

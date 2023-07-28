@@ -19,7 +19,7 @@
             <div
                 v-for="(survey, index) in surveys"
                 :key="survey.id"
-                class="flex flex-col py-4 px-6 shadow-md bg-white hover:bg-grey-50 h-[470px]"
+                class="flex flex-col py-4 px-6 shadow-md bg-white hover:bg-gray-50 h-[470px]"
             >
                 <img src="" alt="" class="w-full h-48 object-cover" />
                 <h4 class="mt-4 text-lg font-bold">{{ survey.title }}</h4>
@@ -34,6 +34,13 @@
                         class="flex py-2 px-4 border border-transparent text-sm rounded-md text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                         >Edit</router-link
                     >
+                    <button
+                        v-if="survey.id"
+                        class="p-1 rounded-full border border-transparent text-sm text-red-500 hover:bg-gray-200 flex items-center justify-center focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                        @click="deleteSurvey(survey.id)"
+                    >
+                        <TrashIcon class="block h-5 w-5"></TrashIcon>
+                    </button>
                 </div>
             </div>
         </div>
@@ -42,19 +49,33 @@
 
 <script>
 import PageComponent from "../components/PageComponent.vue";
-import { PlusIcon } from "@heroicons/vue/24/outline";
+import { PlusIcon, TrashIcon } from "@heroicons/vue/24/outline";
 import { computed } from "vue";
 import { useStore } from "vuex";
 export default {
     name: "Dashboard",
     components: {
         PageComponent,
+        TrashIcon,
         PlusIcon,
     },
     setup() {
         const store = useStore();
+
+        function deleteSurvey(id) {
+            if (
+                confirm(
+                    `Are you sure want to delete this survey ? Operation can't be undone!!`
+                )
+            ) {
+                // store.dispatch("deleteSurvey", id);
+                console.log(id);
+            }
+        }
+
         return {
             PageComponent,
+            deleteSurvey,
             surveys: computed(() => store.state.surveys),
         };
     },
