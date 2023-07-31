@@ -18,6 +18,8 @@ const exampleSurveys = [
                 id: 1,
                 type: "select",
                 question: "What's this called ?",
+                description:
+                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa cum autem cupiditate itaque adipisci mollitia alias vero voluptatem soluta iure, minus odit qui omnis commodi! Tenetur impedit omnis praesentium unde!",
                 data: {
                     options: [
                         {
@@ -35,6 +37,8 @@ const exampleSurveys = [
                 id: 2,
                 type: "checkbox",
                 question: "What's is the A.K.A stands for ?",
+                description:
+                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa cum autem cupiditate itaque adipisci mollitia alias vero voluptatem soluta iure, minus odit qui omnis commodi! Tenetur impedit omnis praesentium unde!",
                 data: {
                     options: [
                         {
@@ -52,7 +56,10 @@ const exampleSurveys = [
                 id: 3,
                 type: "text",
                 question: "Who am I ?",
-                data: {},
+                description: "",
+                data: {
+                    options: [],
+                },
             },
         ],
     },
@@ -72,6 +79,7 @@ const exampleSurveys = [
                 id: 1,
                 type: "select",
                 question: "What's this called ?",
+                description: "",
                 data: {
                     options: [
                         {
@@ -89,6 +97,7 @@ const exampleSurveys = [
                 id: 2,
                 type: "checkbox",
                 question: "What's is the A.K.A stands for ?",
+                description: "",
                 data: {
                     options: [
                         {
@@ -106,7 +115,10 @@ const exampleSurveys = [
                 id: 3,
                 type: "text",
                 question: "Who am I ?",
-                data: {},
+                description: "",
+                data: {
+                    options: [],
+                },
             },
         ],
     },
@@ -125,6 +137,8 @@ const exampleSurveys = [
     },
 ];
 
+const questionTypes = ["checkbox", "select", "text", "radio"];
+
 const store = createStore({
     //state merupakan data yang disimpan dan akan digunakan
     state: {
@@ -134,6 +148,7 @@ const store = createStore({
             token: sessionStorage.getItem("TOKEN"),
         },
         surveys: [...exampleSurveys],
+        questionTypes: questionTypes,
     },
     getters: {},
     actions: {
