@@ -260,7 +260,6 @@ export default {
             questionTypes: computed(() => store.state.questionTypes),
             typeChange,
             upperCaseFirst,
-            // descriptionChange,
             shouldHaveOptions,
             addOption,
             removeOption,

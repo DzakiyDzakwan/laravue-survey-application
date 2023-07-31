@@ -196,6 +196,7 @@ import QuestionEditor from "../components/QuestionEditor.vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { PhotoIcon } from "@heroicons/vue/24/solid";
+import { v4 as uuidv4 } from "uuid";
 
 export default {
     name: "Survey View",
@@ -241,12 +242,19 @@ export default {
         }
 
         function addQuestion(index) {
-            console.log(index);
+            const new_questions = {
+                id: uuidv4(),
+                type: "text",
+                question: "",
+                description: null,
+                data: {},
+            };
+
+            empty_survey.value.questions.splice(index, 0, new_questions);
         }
 
         function deleteQuestion(q) {
             setQuestion(getQuestion().filter((question) => question != q));
-            // console.log(getQuestion().filter((question) => question != q));
         }
 
         return {
