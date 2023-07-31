@@ -232,13 +232,23 @@ export default {
             //
         }
 
+        function getQuestion() {
+            return empty_survey.value.questions;
+        }
+
+        function setQuestion(question) {
+            empty_survey.value.questions = question;
+        }
+
         function addQuestion(index) {
             console.log(index);
         }
 
-        function deleteQuestion(question) {
-            console.log(question);
+        function deleteQuestion(q) {
+            setQuestion(getQuestion().filter((question) => question != q));
+            // console.log(getQuestion().filter((question) => question != q));
         }
+
         return {
             PageComponent,
             empty_survey,
