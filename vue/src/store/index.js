@@ -270,6 +270,22 @@ const store = createStore({
                     return response;
                 });
         },
+        saveSurvey({ commit }, survey) {
+            let response;
+            if (survey.id) {
+                response = axiosClient
+                    .put(`/survey/${survey.id}`, survey)
+                    .then((res) => {
+                        commit("updateSurvey", res.data);
+                        return res;
+                    });
+            } else {
+                response = axiosClient.post("/survey", survey).then((res) => {
+                    commit("saveSurvey", res.data);
+                    return res;
+                });
+            }
+        },
         deleteSurvey({}, id) {
             console.log(id);
         },
@@ -288,6 +304,17 @@ const store = createStore({
             state.user.token = data.token;
             //Mendaftarkan token ke session
             sessionStorage.setItem("TOKEN", data.token);
+        },
+        saveSurvey: (state, data) => {
+            state.surveys = [...state.surveys, data];
+        },
+        updateSurvey: (state, data) => {
+            state.surveys = state.surveys.map((survey) => {
+                if (survey.id !== data.data.id) {
+                    return data;
+                }
+                return survey;
+            });
         },
     },
     modules: {},

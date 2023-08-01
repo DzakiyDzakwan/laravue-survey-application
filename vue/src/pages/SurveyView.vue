@@ -229,8 +229,15 @@ export default {
             });
         }
 
-        function questionChange() {
-            //
+        function questionChange(question) {
+            empty_survey.value.questions = empty_survey.value.questions.map(
+                (q) => {
+                    if (q.id === question.id) {
+                        return JSON.parse(stringify(question));
+                    }
+                    return q;
+                }
+            );
         }
 
         function getQuestion() {
@@ -257,12 +264,24 @@ export default {
             setQuestion(getQuestion().filter((question) => question != q));
         }
 
+        function saveSurvey() {
+            store.dispatch("saveSurvey", empty_survey.value).then((data) => {
+                console.log(data);
+                /* router.push({
+                    name: "Survey View",
+                    params: { id: data.data.id },
+                }); */
+            });
+            // console.log("Berhasil Save");
+        }
+
         return {
             PageComponent,
             empty_survey,
             questionChange,
             addQuestion,
             deleteQuestion,
+            saveSurvey,
         };
     },
 };
